@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
@@ -12,11 +10,6 @@ public class RaceState : GameState
 
     private WordTable _wordTable;
     private WordsDictionary _wordsDictionary;
-    
-    private void Start()
-    {
-        
-    }
 
     protected override void OnEnter()
     {
@@ -57,6 +50,4 @@ public class RaceState : GameState
         Word nextWord = _wordsDictionary.GetRandomWord();
         _wordTable.Init(nextWord);
     }
-
-    
 }

@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class GameState : MonoBehaviour
@@ -31,9 +30,7 @@ public abstract class GameState : MonoBehaviour
         if (enabled)
         {
             foreach (var transition in _transitions)
-            {
                 transition.enabled = false;
-            }
 
             enabled = false;
         }
@@ -43,15 +40,7 @@ public abstract class GameState : MonoBehaviour
     
     public GameState GetNext()
     {
-        foreach (var transition in _transitions)
-        {
-            if (transition.IsPossible)
-            {
-                return transition.NextState;
-            }
-        }
-
-        return null;
+        return (from transition in _transitions where transition.IsPossible select transition.NextState).FirstOrDefault();
     }
 
     protected virtual void OnEnter() { }
