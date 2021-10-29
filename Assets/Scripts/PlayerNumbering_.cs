@@ -53,6 +53,7 @@ public class PlayerNumbering_ : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+        Debug.LogError("Player left room");
         RefreshData();
     }
 

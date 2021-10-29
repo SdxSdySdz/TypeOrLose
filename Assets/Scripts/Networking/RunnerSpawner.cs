@@ -6,112 +6,42 @@ using UnityEngine.Serialization;
 
 using Photon.Realtime;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
-public class RunnerSpawner : MonoBehaviour, IMatchmakingCallbacks
+public class RunnerSpawner : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Runner _runnerPrefab;
     [SerializeField] private bool _isAutoSpawn = true;
-
-    private Stack<GameObject> _spawnedObjects;
-
-    public virtual void OnEnable()
-    {
-        PhotonNetwork.AddCallbackTarget(this);
-    }
-
-    public virtual void OnDisable()
-    {
-        PhotonNetwork.RemoveCallbackTarget(this);
-    }
+    [SerializeField] private byte _maxPlayersCount = 4;
+    [SerializeField] private int _playerTTL = -1;
 
     private void Start()
     {
-        _spawnedObjects = new Stack<GameObject>();
-    }
-    
-    public virtual void OnJoinedRoom()
-    {
-        // Only AutoSpawn if we are a new ActorId. Rejoining should reproduce the objects by server instantiation.
-        if (_isAutoSpawn && PhotonNetwork.LocalPlayer.HasRejoined == false)
-            SpawnRunner();
+        PhotonNetwork.JoinRandomRoom();
     }
     
     public virtual void SpawnRunner()
     {
-        /*
-        Vector3 spawnPos;
-        Quaternion spawnRot;
-        GetSpawnPoint(out spawnPos, out spawnRot);
-        */
-
-        var newRunner = PhotonNetwork.Instantiate(_runnerPrefab.name, Vector3.zero, Quaternion.identity, 0);
-
-        /*int id = PhotonNetwork.LocalPlayer.ActorNumber;
-        id = (id == -1) ? 0 : id % _spawnPoints.Count;
-        _race.Add(id, newRunner.GetComponent<Runner>());*/
-
-        _spawnedObjects.Push(newRunner);
+        PhotonNetwork.Instantiate(_runnerPrefab.name, Vector3.zero, Quaternion.identity, 0);
+    }
+    
+    public override void OnJoinedRoom()
+    {
+        if (_isAutoSpawn && PhotonNetwork.LocalPlayer.HasRejoined == false)
+            SpawnRunner();
     }
 
-    public virtual void DespawnObjects(bool localOnly)
+    public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        while (_spawnedObjects.Count > 0)
-        {
-            var go = _spawnedObjects.Pop();
-            if (go)
-            {
-                if (localOnly)
-                    Destroy(go);
-                else
-                    PhotonNetwork.Destroy(go);
-            }
-        }
-    }
-
-    public virtual void OnFriendListUpdate(List<FriendInfo> friendList)
-    {
-    }
-
-    public virtual void OnCreatedRoom()
-    {
-    }
-
-    public virtual void OnCreateRoomFailed(short returnCode, string message)
-    {
-    }
-
-    public virtual void OnJoinRoomFailed(short returnCode, string message)
-    {
-    }
-
-    public virtual void OnJoinRandomFailed(short returnCode, string message)
-    {
-    }
-
-    public virtual void OnLeftRoom()
-    {
-    }
-
-    /*
-    public virtual void GetSpawnPoint(out Vector3 spawnPos, out Quaternion spawnRot)
-    {
-        Transform point = GetSpawnPoint();
+        Debug.Log("OnJoinRandomFailed() was called by PUN. No random room available in region [" +
+                  PhotonNetwork.CloudRegion +
+                  "], so we create one. Calling: PhotonNetwork.CreateRoom(null, new RoomOptions() {maxPlayers = 4}, null);");
         
-        spawnPos = point.position;
-        spawnRot = point.rotation;
-    }
+        RoomOptions roomOptions = new RoomOptions() {MaxPlayers = _maxPlayersCount};
+        if (_playerTTL >= 0)
+            roomOptions.PlayerTtl = _playerTTL;
 
-    protected virtual Transform GetSpawnPoint()
-    {
-        if (_spawnPoints == null || _spawnPoints.Count == 0)
-        {
-            throw new Exception("There are no any spawn point");
-        }
-        else
-        {
-            int id = PhotonNetwork.LocalPlayer.ActorNumber;
-            return _spawnPoints[(id == -1) ? 0 : id % _spawnPoints.Count];
-        }
-    }*/
+        PhotonNetwork.CreateRoom(null, roomOptions, null);
+    }
 }
 
