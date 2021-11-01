@@ -1,8 +1,5 @@
-using System;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]

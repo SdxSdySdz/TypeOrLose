@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using ExitGames.Client.Photon;
 using UnityEngine;
-using UnityEngine.Serialization;
-
 using Photon.Realtime;
 using Photon.Pun;
-using UnityEngine.SceneManagement;
 
 public class RunnerSpawner : MonoBehaviourPunCallbacks
 {

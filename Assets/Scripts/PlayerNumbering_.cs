@@ -1,17 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-
 using UnityEngine;
-
 using Photon.Pun;
 using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-
 public class PlayerNumbering_ : MonoBehaviourPunCallbacks
 {
-    //TODO: Add a "numbers available" bool, to allow easy access to this?!
-
     private static PlayerNumbering_ _instance;
     private static Player[] _sortedPlayers;
     [SerializeField] private bool _dontDestroyOnLoad = true;
