@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(PhotonView))]
 [RequireComponent(typeof(PhotonTransformView))]
@@ -12,6 +11,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class Runner : MonoBehaviourPun, IPunObservable
 {
+    [SerializeField] private TMP_Text _nickName;
+    
     private WayPointsFollower _wayPointsFollower;
     private Rigidbody _rigidbody;
     private bool _isReady;
@@ -27,16 +28,21 @@ public class Runner : MonoBehaviourPun, IPunObservable
         stream.Serialize(ref _isReady);
     }
 
+    // TODO Если заспавнить игрока и сразу нажать кнопку Exit, то код продолжит выполнение в главном меню и сламается на FindObjectOfType<Race>().RefreshRunners();
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => photonView.Owner.GetPlayerNumber() >= 0);
 
         _isReady = false;
+        
         _wayPointsFollower = GetComponent<WayPointsFollower>();
         
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.useGravity = false;
         _rigidbody.freezeRotation = true;
+
+        string nickname = photonView.Owner.NickName;
+        _nickName.text = nickname;
 
         FindObjectOfType<Race>().RefreshRunners();
     }
