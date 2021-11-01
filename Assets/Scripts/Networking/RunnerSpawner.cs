@@ -5,6 +5,7 @@ using Photon.Pun;
 public class RunnerSpawner : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Runner _runnerPrefab;
+    [SerializeField] private Race _race;
     [SerializeField] private bool _isAutoSpawn = true;
     [SerializeField] private byte _maxPlayersCount = 4;
     [SerializeField] private int _playerTTL = -1;
@@ -16,13 +17,19 @@ public class RunnerSpawner : MonoBehaviourPunCallbacks
     
     public virtual void SpawnRunner()
     {
-        PhotonNetwork.Instantiate(_runnerPrefab.name, Vector3.zero, Quaternion.identity, 0);
+        var runnerObject = PhotonNetwork.Instantiate(_runnerPrefab.name, Vector3.zero, Quaternion.identity, 0);
+        Runner runner = runnerObject.GetComponent<Runner>();
+        runner.PlayerNumberIsAssigned += OnPlayerNumberAssigned;
+
     }
     
     public override void OnJoinedRoom()
     {
         if (_isAutoSpawn && PhotonNetwork.LocalPlayer.HasRejoined == false)
+        {
             SpawnRunner();
+            // _race.RefreshRunners();
+        }
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -36,6 +43,12 @@ public class RunnerSpawner : MonoBehaviourPunCallbacks
             roomOptions.PlayerTtl = _playerTTL;
 
         PhotonNetwork.CreateRoom(null, roomOptions, null);
+    }
+
+    private void OnPlayerNumberAssigned(Runner runner)
+    {
+        _race.RefreshRunners();
+        runner.PlayerNumberIsAssigned -= OnPlayerNumberAssigned;
     }
 }
 

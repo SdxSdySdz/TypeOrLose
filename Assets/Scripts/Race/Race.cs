@@ -36,7 +36,7 @@ public class Race : MonoBehaviour
         var runners = FindObjectsOfType<Runner>();
         foreach (var runner in runners)
         {
-            int id = runner.photonView.Owner.ActorNumber;
+            int id = runner.photonView.Owner.GetPlayerNumber();
             id = (id == -1) ? 0 : id % _tracks.Count;
             
             Add(id, runner);

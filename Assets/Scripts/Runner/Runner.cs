@@ -4,6 +4,7 @@ using System.Linq;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(PhotonView))]
 [RequireComponent(typeof(PhotonTransformView))]
@@ -16,6 +17,8 @@ public class Runner : MonoBehaviourPun, IPunObservable
     private WayPointsFollower _wayPointsFollower;
     private Rigidbody _rigidbody;
     private bool _isReady;
+
+    public event UnityAction<Runner> PlayerNumberIsAssigned;
 
     public bool IsReady
     {
@@ -32,6 +35,7 @@ public class Runner : MonoBehaviourPun, IPunObservable
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => photonView.Owner.GetPlayerNumber() >= 0);
+        PlayerNumberIsAssigned?.Invoke(this);
 
         _isReady = false;
         
@@ -44,7 +48,7 @@ public class Runner : MonoBehaviourPun, IPunObservable
         string nickname = photonView.Owner.NickName;
         _nickName.text = nickname;
 
-        FindObjectOfType<Race>().RefreshRunners();
+        // FindObjectOfType<Race>().RefreshRunners();
     }
 
     public void Run(IEnumerable<Vector3> wayPoints)
