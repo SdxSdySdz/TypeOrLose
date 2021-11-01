@@ -15,8 +15,12 @@ public class Runner : MonoBehaviourPun, IPunObservable
     private WayPointsFollower _wayPointsFollower;
     private Rigidbody _rigidbody;
     private bool _isReady;
-    
-    public bool IsReady => _isReady;
+
+    public bool IsReady
+    {
+        get => _isReady;
+        set => _isReady = value;
+    }
     
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -45,10 +49,5 @@ public class Runner : MonoBehaviourPun, IPunObservable
     public void MakeStep()
     {
         _wayPointsFollower.MakeStep();
-    }
-    
-    public void MakeReady()
-    {
-        _isReady = true;
     }
 }

@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
-using Photon.Pun;
 
 public class Race : MonoBehaviour
 {
@@ -31,17 +28,6 @@ public class Race : MonoBehaviour
         IsRun = false;
     }
     
-    public void Run()
-    {
-        IsRun = true;
-        MyTrack.Run(_wayPointsCount);
-    }
-    
-    public void MarkMyRunnerAsReady()
-    {
-        MyRunner.MakeReady();
-    }
-    
     public void RefreshRunners()
     {
         foreach (var track in _tracks)
@@ -55,6 +41,20 @@ public class Race : MonoBehaviour
             
             Add(id, runner);
         }
+    }
+    
+    public void Run()
+    {
+        if (AreAllRunnersReady == false)
+            throw new Exception("Not all runners are ready to start the race yet");
+        
+        IsRun = true;
+        MyTrack.Run(_wayPointsCount);
+    }
+    
+    public void MarkMyRunnerAsReady()
+    {
+        MyRunner.IsReady = true;
     }
 
     private void Add(int trackIndex, Runner runner)

@@ -69,7 +69,6 @@
      <Compile Include="Assets\Scripts\GameStateMachine\Transitions\AnyRunnersTransition.cs" />
      <Compile Include="Assets\Scripts\MainMenu\PigScript\MouseBasedScaler.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
-     <Compile Include="Assets\CapsLockCkecker.cs" />
      <Compile Include="Assets\Scenes\Typed\MainMenuScene.cs" />
      <Compile Include="Assets\Scripts\GameStateMachine\Transitions\RaceIsRunTransition.cs" />
      <Compile Include="Assets\Scripts\Runner\WayPointsFollower.cs" />
@@ -98,7 +97,7 @@
      <Compile Include="Assets\Scripts\GameStateMachine\GameStateMachine.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
      <Compile Include="Assets\Scripts\TypingLogic\TypingSoundPlayer.cs" />
-     <Compile Include="Assets\Scripts\GameStateMachine\Transitions\ReadyTransition.cs" />
+     <Compile Include="Assets\Scripts\GameStateMachine\Transitions\AllReadyTransition.cs" />
      <Compile Include="Assets\Scripts\GameStateMachine\Transition.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
      <Compile Include="Assets\Scripts\RunnerSkins\RunnerSkin.cs" />
