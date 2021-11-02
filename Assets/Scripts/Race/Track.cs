@@ -27,7 +27,8 @@ public class Track : MonoBehaviour
         
         Runner.transform.LookAt(_to);
     }
-
+    
+    // TODO генерация точек вне ответсвенности Track
     private IEnumerable<Vector3> GenerateWayPoints(int wayPointsCount)
     {
         var wayPoints = new Vector3[wayPointsCount];

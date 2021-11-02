@@ -4,7 +4,6 @@ public class CapsLockHint : MonoBehaviour
 {
     [SerializeField] private GameObject _hint;
     
-    
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
     private bool IsCapsLockOn => (GetKeyState(0x14) & 1) > 0;
     

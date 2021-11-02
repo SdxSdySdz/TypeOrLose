@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// TODO если гонка началась, заполнить пустые трэки ботами
 public class Race : MonoBehaviour
 {
     [SerializeField] private int _wayPointsCount;

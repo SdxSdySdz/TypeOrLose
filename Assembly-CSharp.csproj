@@ -61,7 +61,6 @@
      <Compile Include="Assets\Scripts\Race\Track.cs" />
      <Compile Include="Assets\Scripts\TypingLogic\WordsDictionary.cs" />
      <Compile Include="Assets\Scripts\Race\Race.cs" />
-     <Compile Include="Assets\Scripts\Networking\ToMainMenuButton.cs" />
      <Compile Include="Assets\Scripts\Networking\ConnectionProvider.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatAppIdCheckerUI.cs" />
      <Compile Include="Assets\Scripts\TypingLogic\Word.cs" />
@@ -93,7 +92,7 @@
      <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
      <Compile Include="Assets\Scenes\Typed\LoadingScene.cs" />
      <Compile Include="Assets\Scripts\GameStateMachine\States\WaitForReadyState.cs" />
-     <Compile Include="Assets\Scripts\PlayerNumbering_.cs" />
+     <Compile Include="Assets\Scripts\PlayerNumbering.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs" />
      <Compile Include="Assets\Scripts\GameStateMachine\GameStateMachine.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
@@ -102,6 +101,7 @@
      <Compile Include="Assets\Scripts\GameStateMachine\Transition.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
      <Compile Include="Assets\Scripts\RunnerSkins\RunnerSkin.cs" />
+     <Compile Include="Assets\Scripts\UI\ToMainMenuButton.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

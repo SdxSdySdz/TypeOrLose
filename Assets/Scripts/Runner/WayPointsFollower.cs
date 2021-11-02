@@ -40,7 +40,7 @@ public class WayPointsFollower : MonoBehaviour
             _speed = SolveSpeed(difference.magnitude);
             transform.position = Vector3.MoveTowards(transform.position, target, _speed * Time.fixedDeltaTime);
             
-            difference = (target - transform.position);
+            difference = target - transform.position;
             yield return waitForFixedUpdate;
         }
     }

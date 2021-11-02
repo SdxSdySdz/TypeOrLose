@@ -10,6 +10,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PhotonTransformView))]
 [RequireComponent(typeof(WayPointsFollower))] 
 [RequireComponent(typeof(Rigidbody))]
+// TODO вместо синхронизации transform синхронизировать прогресс в гонке
 public class Runner : MonoBehaviourPun, IPunObservable
 {
     [SerializeField] private TMP_Text _nickName;
@@ -31,7 +32,8 @@ public class Runner : MonoBehaviourPun, IPunObservable
         stream.Serialize(ref _isReady);
     }
 
-    // TODO Если заспавнить игрока и сразу нажать кнопку Exit, то код продолжит выполнение в главном меню и сламается на FindObjectOfType<Race>().RefreshRunners();
+    // TODO Если заспавнить игрока и сразу нажать кнопку Exit,
+    // TODO то код продолжит выполнение в главном меню и сломается на FindObjectOfType<Race>().RefreshRunners();
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => photonView.Owner.GetPlayerNumber() >= 0);
@@ -47,8 +49,6 @@ public class Runner : MonoBehaviourPun, IPunObservable
 
         string nickname = photonView.Owner.NickName;
         _nickName.text = nickname;
-
-        // FindObjectOfType<Race>().RefreshRunners();
     }
 
     public void Run(IEnumerable<Vector3> wayPoints)

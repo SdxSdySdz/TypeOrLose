@@ -15,20 +15,12 @@ public class RunnerSpawner : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRandomRoom();
     }
     
-    public virtual void SpawnRunner()
-    {
-        var runnerObject = PhotonNetwork.Instantiate(_runnerPrefab.name, Vector3.zero, Quaternion.identity, 0);
-        Runner runner = runnerObject.GetComponent<Runner>();
-        runner.PlayerNumberIsAssigned += OnPlayerNumberAssigned;
-
-    }
     
     public override void OnJoinedRoom()
     {
         if (_isAutoSpawn && PhotonNetwork.LocalPlayer.HasRejoined == false)
         {
             SpawnRunner();
-            // _race.RefreshRunners();
         }
     }
 
@@ -43,6 +35,14 @@ public class RunnerSpawner : MonoBehaviourPunCallbacks
             roomOptions.PlayerTtl = _playerTTL;
 
         PhotonNetwork.CreateRoom(null, roomOptions, null);
+    }
+    
+    private void SpawnRunner()
+    {
+        var runnerObject = PhotonNetwork.Instantiate(_runnerPrefab.name, Vector3.zero, Quaternion.identity, 0);
+        Runner runner = runnerObject.GetComponent<Runner>();
+        runner.PlayerNumberIsAssigned += OnPlayerNumberAssigned;
+
     }
 
     private void OnPlayerNumberAssigned(Runner runner)
