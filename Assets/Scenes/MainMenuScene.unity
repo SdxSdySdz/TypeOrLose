@@ -1323,7 +1323,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1726812822}
   - component: {fileID: 1726812821}
-  - component: {fileID: 1726812823}
   m_Layer: 0
   m_Name: PigManager
   m_TagString: Untagged
@@ -1361,18 +1360,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1726812823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726812820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dac7d9430d2e32499e9bef870ca3681, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1734096909
 GameObject:
   m_ObjectHideFlags: 0
