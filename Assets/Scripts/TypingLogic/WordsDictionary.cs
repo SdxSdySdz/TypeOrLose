@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 public class WordsDictionary
 {
-    private readonly Random _random;
     private List<Word> _words;
     private int _wordIndex;
     
     public WordsDictionary(IEnumerable<Word> words)
     {
-        _random = new Random();
         _words = new List<Word>(words);
         _wordIndex = 0;
     }
@@ -20,7 +19,8 @@ public class WordsDictionary
     public Word GetRandomWord()
     {
         // return GetWord(_wordIndex++ % _words.Count);
-        int randomIndex = _random.Next(_words.Count);
+        
+        int randomIndex = Random.Range(0, _words.Count);
         return GetWord(randomIndex);
     }
 

@@ -9,12 +9,13 @@ public class Race : MonoBehaviour
     [SerializeField] private int _wayPointsCount;
 
     private List<Track> _tracks;
-    
+    private Track _myTrack;
+
     public bool IsRun { get; private set; }
     private IEnumerable<Runner> Runners => _tracks
         .Where(track => track.IsEmpty == false)
         .Select(track => track.Runner);
-    private Track MyTrack { get; set; }
+
     
     public int RunnersCount => _tracks.Count(runner => runner.IsEmpty == false);
     public bool AreAllRunnersReady => CheckAllRunnersAreReady();
@@ -50,7 +51,7 @@ public class Race : MonoBehaviour
             throw new Exception("Not all runners are ready to start the race yet");
         
         IsRun = true;
-        MyTrack.Run(_wayPointsCount);
+        _myTrack.Run(_wayPointsCount);
     }
     
     public void MarkMyRunnerAsReady()
@@ -64,7 +65,7 @@ public class Race : MonoBehaviour
         
         if (runner.photonView.IsMine)
         {
-            MyTrack = _tracks[trackIndex];
+            _myTrack = _tracks[trackIndex];
             MyRunner = runner;
         }
     }
