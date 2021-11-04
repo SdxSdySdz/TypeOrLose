@@ -1,3 +1,4 @@
+using Constants;
 using Photon.Pun;
 using UnityEngine;
 
@@ -17,6 +18,6 @@ public class ConnectionProvider : MonoBehaviourPunCallbacks
                   PhotonNetwork.CloudRegion +
                   "] and can join a room.");
         
-        PhotonNetwork.LoadLevel("MainMenuScene");
+        PhotonNetwork.LoadLevel(SceneNames.MainMenu);
     }
 }

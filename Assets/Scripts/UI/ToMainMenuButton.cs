@@ -1,3 +1,4 @@
+using Constants;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ public class ToMainMenuButton : MonoBehaviour
 
     public void OnButtonClicked()
     {
-        PhotonNetwork.LoadLevel("MainMenuScene");
+        PhotonNetwork.LoadLevel(SceneNames.MainMenu);
         PhotonNetwork.LeaveRoom();
     }
 }
