@@ -16,16 +16,11 @@ public class WordsDictionary
 
     public WordsDictionary(IEnumerable<string> words) : this(words.Select(word => new Word(word))) {  }
 
+    public Word this[int index] => _words[index];
+
     public Word GetRandomWord()
     {
-        // return GetWord(_wordIndex++ % _words.Count);
-        
         int randomIndex = Random.Range(0, _words.Count);
-        return GetWord(randomIndex);
-    }
-
-    public Word GetWord(int index)
-    {
-        return _words[index];
+        return _words[randomIndex];
     }
 }

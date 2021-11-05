@@ -10,8 +10,5 @@ public class Word
         _word = word;
     }
 
-    public char GetLetter(int index)
-    {
-        return _word[index];
-    }
+    public char this[int index] => _word[index];
 }

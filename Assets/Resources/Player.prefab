@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nickName: {fileID: 7494002557791057147}
+  IsReady: 0
 --- !u!114 &4656463216188214029
 MonoBehaviour:
   m_ObjectHideFlags: 0

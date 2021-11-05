@@ -8,7 +8,9 @@ public class WordTable : MonoBehaviour
 {
     private WordFiller _wordFiller;
     private InputTrigger _inputTrigger;
-
+    private readonly float _forwardOffset = 8;
+    private readonly float _upOffset = 5;
+    
     public UnityEvent LetterFilled;
     public UnityEvent WordFilled;
     
@@ -38,7 +40,7 @@ public class WordTable : MonoBehaviour
     {
         Transform target = runner.transform;
         
-        Vector3 offset = target.forward * 8 + target.up * 5;
+        Vector3 offset = target.forward * _forwardOffset + target.up * _upOffset;
         transform.position = target.position + offset;
         transform.LookAt(target);
         
@@ -47,7 +49,8 @@ public class WordTable : MonoBehaviour
 
     private void OnCorrectUserInput()
     {
-        if (_wordFiller.IsEmpty || _wordFiller.IsFilled) return;
+        if (_wordFiller.IsEmpty || _wordFiller.IsFilled) 
+            return;
         
         LetterFilled?.Invoke();
         _wordFiller.FillNextLetter();

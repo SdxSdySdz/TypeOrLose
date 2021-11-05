@@ -10,7 +10,7 @@ public class WordFiller : MonoBehaviour
     private Text _text;
     private int _filledLettersCount;
 
-    public char FirstUnfilledLetter => _word.GetLetter(_filledLettersCount);
+    public char FirstUnfilledLetter => _word[_filledLettersCount];
     public bool IsEmpty => _word == null;
     public bool IsFilled => _filledLettersCount >= _word.Length;
 
@@ -53,6 +53,4 @@ public class WordFiller : MonoBehaviour
         
         _text.text = newText;
     }
-
-    
 }
