@@ -5,13 +5,11 @@ using Random = UnityEngine.Random;
 
 public class WordsDictionary
 {
-    private List<Word> _words;
-    private int _wordIndex;
-    
+    private readonly List<Word> _words;
+
     public WordsDictionary(IEnumerable<Word> words)
     {
         _words = new List<Word>(words);
-        _wordIndex = 0;
     }
 
     public WordsDictionary(IEnumerable<string> words) : this(words.Select(word => new Word(word))) {  }
