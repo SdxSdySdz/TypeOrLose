@@ -53,11 +53,6 @@ public class Race : MonoBehaviour
         IsRun = true;
         _myTrack.Run(_wayPointsCount);
     }
-    
-    public void MarkMyRunnerAsReady()
-    {
-        MyRunner.IsReady = true;
-    }
 
     private void Add(int trackIndex, Runner runner)
     {

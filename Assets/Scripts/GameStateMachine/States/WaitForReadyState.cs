@@ -10,19 +10,14 @@ public class WaitForReadyState : GameState
     {
         _wordTable = Instantiate(_wordTablePrefab, Vector3.zero, Quaternion.identity);
 
-        _wordTable.WordFilled.AddListener(OnMyRunnerReady);
+        _wordTable.WordFilled.AddListener(Race.MyRunner.OnReady);
         _wordTable.Follow(Race.MyRunner);
         _wordTable.Init(new Word("Ready"));
     }
 
     protected override void OnExit()
     {
-        _wordTable.WordFilled.RemoveListener(OnMyRunnerReady);
+        _wordTable.WordFilled.RemoveListener(Race.MyRunner.OnReady);
         Destroy(_wordTable.gameObject);
-    }
-
-    private void OnMyRunnerReady()
-    {
-        Race.MarkMyRunnerAsReady();
     }
 }

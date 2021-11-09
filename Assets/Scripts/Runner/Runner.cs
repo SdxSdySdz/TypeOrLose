@@ -17,14 +17,15 @@ public class Runner : MonoBehaviourPun, IPunObservable
     
     private WayPointsFollower _wayPointsFollower;
     private Rigidbody _rigidbody;
-    
-    public bool IsReady;
+    private bool _isReady;
 
     public event UnityAction<Runner> PlayerNumberIsAssigned;
     
+    public bool IsReady => _isReady;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        stream.Serialize(ref IsReady);
+        stream.Serialize(ref _isReady);
     }
 
     // TODO Если заспавнить игрока и сразу нажать кнопку Exit,
@@ -34,7 +35,7 @@ public class Runner : MonoBehaviourPun, IPunObservable
         yield return new WaitUntil(() => photonView.Owner.GetPlayerNumber() >= 0);
         PlayerNumberIsAssigned?.Invoke(this);
 
-        IsReady = false;
+        _isReady = false;
         
         _wayPointsFollower = GetComponent<WayPointsFollower>();
         
@@ -45,7 +46,7 @@ public class Runner : MonoBehaviourPun, IPunObservable
         string nickname = photonView.Owner.NickName;
         _nickName.text = nickname;
     }
-
+    
     public void Run(IEnumerable<Vector3> wayPoints)
     {
         _wayPointsFollower.Init(new Stack<Vector3>(wayPoints.Reverse()));
@@ -54,5 +55,10 @@ public class Runner : MonoBehaviourPun, IPunObservable
     public void MakeStep()
     {
         _wayPointsFollower.MakeStep();
+    }
+
+    public void OnReady()
+    {
+        _isReady = true;
     }
 }
